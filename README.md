@@ -9,4 +9,4 @@ Different variants of ImmunoMatch is available on huggingface, according to the 
 | --------------- | ---------- |
 | [ImmunoMatch](https://huggingface.co/fraternalilab/immunomatch) | A mixture of antibodies with both κ and λ light chains |
 | [ImmunoMatch-κ](https://huggingface.co/fraternalilab/immunomatch-kappa) | Antibodies with κ light chains |
-| [ImmunoMatch-λ](https://huggingface.co/fraternalilab/immunomatch_lambda) | Antibodies with λ light chains |
+| [ImmunoMatch-λ](https://huggingface.co/fraternalilab/immunomatch-lambda) | Antibodies with λ light chains |
