@@ -1,9 +1,10 @@
 # ImmunoMatch
-This is the repo for the antibody heavy and light chain pairing tool - ImmunoMatch
 
-ImmunoMatch is a protein language model finetuned from AntiBERTa2, aiming at investigating the heavy and light chain pairing preferences in antibody. The input sequence to the model should be a pair of sequences of VH and VL domains.
+![ImmunoMatch logo](ImmunoMatch_logo.png)
 
-Different variants of ImmunoMatch is available on huggingface, according to the use of interest:
+ImmunoMatch is a machine learning framework for deciphering the molecular rules governing the pairing of antibody chains. Fine-tuned on an antibody-specific language model ([AntiBERTA2](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.biorxiv.org/content/10.1101/2023.12.12.569610v1)), ImmunoMatch learns from paired H and L sequences from single human B cells to distinguish cognate H-L pairs and randomly paired sequences. 
+
+A total of three variants of ImmunoMatch, trained on different subsets of the data, are made available on huggingface:
 
 | Checkpoint name | Trained on |
 | --------------- | ---------- |
