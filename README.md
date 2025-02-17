@@ -12,11 +12,13 @@ A total of three variants of ImmunoMatch, trained on different subsets of the da
 | [ImmunoMatch-κ](https://huggingface.co/fraternalilab/immunomatch-kappa) | Antibodies with κ light chains |
 | [ImmunoMatch-λ](https://huggingface.co/fraternalilab/immunomatch-lambda) | Antibodies with λ light chains |
 
-
 ### Try it out on Google Colab
 `Run_ImmunoMatch.ipynb` contains example code on how to apply any ImmunoMatch model to obtain H-L pairing scores for a given VH-VL sequence pair, or to annotate sequences in batch upon supplying a CSV. You can also try it out on Google Collaboratory:
 
 [![Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fraternalilab/ImmunoMatch/blob/main/Run_ImmunoMatch.ipynb)
+
+### Requirements
+There are no specific prerequisites to use ImmunoMatch beyond standard installation of Huggingface libraries on Python. On a clean virtual environment on Google Colab, the installation of these libraries took around 1 minute.
 
 ### Figure reproducibility
 Folder `figure_code` contains all Python and R code used to generate figure panels in the manuscript.
