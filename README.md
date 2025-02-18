@@ -12,6 +12,8 @@ A total of three variants of ImmunoMatch, trained on different subsets of the da
 | [ImmunoMatch-κ](https://huggingface.co/fraternalilab/immunomatch-kappa) | Antibodies with κ light chains |
 | [ImmunoMatch-λ](https://huggingface.co/fraternalilab/immunomatch-lambda) | Antibodies with λ light chains |
 
+Please note that the ImmunoMatch models are provided under a CC-BY-NC-4.0 license.
+
 ### Try it out on Google Colab
 `Run_ImmunoMatch.ipynb` contains example code on how to apply any ImmunoMatch model to obtain H-L pairing scores for a given VH-VL sequence pair, or to annotate sequences in batch upon supplying a CSV. You can also try it out on Google Collaboratory:
 
@@ -28,7 +30,17 @@ Folder `figure_code` contains all Python and R code used to generate figure pane
 If you have used any of the ImmunoMatch models in your research please cite:
 
 ```
-
+@article {Guo2025.02.11.637677,
+	author = {Guo, Dongjun and Dunn-Walters, Deborah K and Fraternali, Franca and Ng, Joseph CF},
+	title = {ImmunoMatch learns and predicts cognate pairing of heavy and light immunoglobulin chains},
+	elocation-id = {2025.02.11.637677},
+	year = {2025},
+	doi = {10.1101/2025.02.11.637677},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2025/02/15/2025.02.11.637677},
+	eprint = {https://www.biorxiv.org/content/early/2025/02/15/2025.02.11.637677.full.pdf},
+	journal = {bioRxiv}
+}
 ```
 
 
