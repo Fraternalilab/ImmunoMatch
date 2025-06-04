@@ -93,3 +93,37 @@ g <- ggplot(reshape2::melt(king@meta.data[which(!is.na(king$SHM_CAT)), ],
   xlab("ImmunoMatch pairing score")
 ggsave(plot = g, width = 5.6, height = 2.4,
        filename = "Documents/Dongjun_Guo/King_Tonsil_allBcells_shm.svg")
+
+# scatter plot of MU_FREQ vs pairing_scores2 and group by cell-type
+# for simplicity here I try to simplify the labels
+king$CellType2 <- factor(
+  king$CellType,
+  levels = levels(king$CellType),
+  labels = c("Naive", "Activated", "preGC", "GC", "GC", "GC", "GC",
+             "(pre-)Plasmablast", "(pre-)Plasmablast", "Memory", "Memory", "Cycling")
+)
+
+p <- lapply(levels(king$CellType2), function(x){
+  color_list <- scales::hue_pal()(length(levels(king$CellType2)))
+  names(color_list) <- levels(king$CellType2)
+  o <- ggplot(king@meta.data[which(!is.na(king$SHM_CAT) &
+                                king$CellType2 == x), ], 
+         aes(x = IGH_MU_FREQ, y = pairing_scores2, colour = CellType2)) + 
+    geom_point(size = 0.7) + ggtitle(NULL, subtitle = x) +
+    scale_color_manual(values = color_list) +
+    scale_y_continuous("ImmunoMatch\npairing score", limits = c(0, 1)) +
+    scale_x_continuous(labels = c("100%", "95%", "90%", "85%", "80%"),
+                       breaks = c(0, 0.05, 0.1, 0.15, 0.2),
+                       name = "H chain identity to germline (%)",
+                       limits = c(0, 0.22)) +
+    theme_bw() + 
+    theme(legend.position = "none")
+  ggExtra::ggMarginal(o, type = "density", margins = "y", groupColour = TRUE)
+})
+ggsave("Documents/Dongjun_Guo/shm_vs_pairing_celltype.svg",
+       width = 8.5, height = 7, plot = cowplot::plot_grid(plotlist = p))
+# statistics
+summary(
+  lmerTest::lmer(pairing_scores2 ~ IGH_MU_FREQ + (1 | CellType2),
+                 data = king@meta.data[which(!is.na(king$SHM_CAT)), ])
+)
