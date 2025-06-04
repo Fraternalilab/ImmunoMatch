@@ -28,29 +28,33 @@ randomH$pident_group <- ggplot2::cut_width(
 )
 randomH$score_diff <- randomH$pairing_scores2 - randomH$pairing_scores2_WT
 
-library(ggplot2)
-ggplot(randomH[which(randomH$Therapeutic == "Trastuzumab"), ],
-       aes(x = pident, y = pairing_scores2)) + geom_point() +
-  geom_hline(aes(yintercept = unique(pairing_scores2_WT))) +
-  cowplot::theme_cowplot() + ylim(0, 1)
-
+# first just a comparison of actual vs random
 library(plyr)
-pair_stats <- ddply(
-  randomH, c("Therapeutic", "pairing_scores2_WT", "pident_group"), summarise, 
-  prop_pair = mean(pairing_scores2 >= 0.5, na.rm = TRUE), 
-  n_pair = sum(pairing_scores2 >= 0.5), 
-  n = length(VH_random) 
+randomH_summary <- ddply(
+  randomH, c("Therapeutic", "species_h"), summarise,
+  actual_score = unique(pairing_scores2_WT, na.rm = TRUE),
+  random_score = median(pairing_scores2, na.rm = TRUE)
+)
+randomH_summary <- reshape2::melt(
+  id.vars = c("Therapeutic", "species_h"),
+  data = randomH_summary
+)
+randomH_summary$variable <- factor(
+  randomH_summary$variable, labels = c("observed\npairs",
+                                       "random\npairs")
 )
 
-best_random <- ddply(
-  randomH, c("Therapeutic", "pairing_scores2_WT"), summarise, 
-  best_random = VH_random[which.max(pairing_scores2)],
-  max_score = max(pairing_scores2),
-  best_pident = pident[which.max(pairing_scores2)],
-  n_pair = sum(pairing_scores2 >= 0.5),
-  total_random = length(pairing_scores2)
-)
+library(ggplot2)
+p <- ggplot(randomH_summary, aes(x = variable, y = value)) + 
+  geom_boxplot(outliers = FALSE) + 
+  cowplot::theme_cowplot() + xlab("") +
+  geom_point(position = position_dodge2(width = 0.2), 
+             size = 0.6, alpha = 0.5, pch = 20) + 
+  ylab("ImmunoMatch pairing score")
+ggsave(plot = p, filename = "Documents/Dongjun_Guo/immunomatch_thera_abs/score_distributions_boxplot.svg",
+       width = 3, height = 3.6)
 
+# pident versus score diff
 highest_pident_random <- ddply(
   randomH, c("Therapeutic", "HeavySequence", "X100..SI.Structure",
              "X99..SI.Structure", "X95.98..SI.Structure"), 
@@ -88,63 +92,3 @@ p <- ggplot(highest_pident_random,
   xlab("Sequence identity WT vs random (%)")
 ggsave(plot = p, width = 3.7, height = 3.1,
        "Documents/Dongjun_Guo/immunomatch_thera_abs/seq_id-vs_score-diff.svg")
-# random kappa
-randomK <- read.csv("Documents/Dongjun_Guo/immunomatch_thera_abs/TheraSAbDab_SeqStruc_OnlineDownload_20241205_human_monospecific_approved-active_randomKappa_scored_pident.csv",
-                    stringsAsFactors = FALSE)
-randomK$pident_group <- ggplot2::cut_width(
-  randomK$pident, width = 10, labels = c("<50", "50-60", "60-70", "70-80", "80-90", "90-100"),
-  breaks = c(0, 50, 60, 70, 80, 90, 100)
-)
-pair_stats <- ddply(
-  randomK, c("Therapeutic", "VD.LC", "pident_group"), summarise, 
-  prop_pair = mean(pairing_scores_k >= 0.5, na.rm = TRUE), 
-  n_pair = sum(pairing_scores_k >= 0.5), 
-  n = length(VKappa_random) 
-)
-best_random <- ddply(
-  randomK, c("Therapeutic", "VD.LC"), summarise, 
-  best_random = VKappa_random[which.max(pairing_scores_k)],
-  max_score = max(pairing_scores_k),
-  best_pident = pident[which.max(pairing_scores_k)],
-  n_pair = sum(pairing_scores_k >= 0.5),
-  total_random = length(pairing_scores_k)
-)
-highest_pident_random <- ddply(
-  randomK, c("Therapeutic", "VD.LC"), summarise, 
-  highest_pident = VKappa_random[which.max(pident)],
-  score = pairing_scores_k[which.max(pident)],
-  pident = pident[which.max(pident)],
-  n_pair = sum(pairing_scores_k >= 0.5),
-  total_random = length(pairing_scores_k)
-)
-
-randomL <- read.csv("Documents/Dongjun_Guo/immunomatch_thera_abs/TheraSAbDab_SeqStruc_OnlineDownload_20241205_human_monospecific_approved-active_randomLambda_scored_pident.csv",
-                    stringsAsFactors = FALSE)
-randomL$pident_group <- ggplot2::cut_width(
-  randomL$pident, width = 10, labels = c("<50", "50-60", "60-70", "70-80", "80-90", "90-100"),
-  breaks = c(0, 50, 60, 70, 80, 90, 100)
-)
-pair_stats <- ddply(
-  randomL, c("Therapeutic", "VD.LC", "pident_group"), summarise, 
-  prop_pair = mean(pairing_scores_l >= 0.5, na.rm = TRUE), 
-  n_pair = sum(pairing_scores_l >= 0.5), 
-  n = length(VLambda_random) 
-)
-best_random <- ddply(
-  randomL, c("Therapeutic", "VD.LC"), summarise, 
-  best_random = VLambda_random[which.max(pairing_scores_l)],
-  max_score = max(pairing_scores_l),
-  best_pident = pident[which.max(pairing_scores_l)],
-  n_pair = sum(pairing_scores_l >= 0.5),
-  total_random = length(pairing_scores_l)
-)
-highest_pident_random <- ddply(
-  randomL, c("Therapeutic", "VD.LC"), summarise, 
-  highest_pident = VLambda_random[which.max(pident)],
-  score = pairing_scores_l[which.max(pident)],
-  pident = pident[which.max(pident)],
-  n_pair = sum(pairing_scores_l >= 0.5),
-  total_random = length(pairing_scores_l)
-)
-
-
