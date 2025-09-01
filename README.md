@@ -19,6 +19,10 @@ Please note that the ImmunoMatch models are provided under a CC-BY-NC-4.0 licens
 
 [![Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fraternalilab/ImmunoMatch/blob/main/Run_ImmunoMatch.ipynb)
 
+### Python package
+
+ImmunoMatch is also available as a [stand-alone Python package on PyPI](https://pypi.org/project/ImmunoMatch/).
+
 ### Requirements
 There are no specific prerequisites to use ImmunoMatch beyond standard installation of Huggingface libraries on Python. On a clean virtual environment on Google Colab, the installation of these libraries took around 1 minute.
 
