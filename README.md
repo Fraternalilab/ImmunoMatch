@@ -33,18 +33,7 @@ Folder `figure_code` contains all Python and R code used to generate figure pane
 
 If you have used any of the ImmunoMatch models in your research please cite:
 
-```
-@article {Guo2025.02.11.637677,
-	author = {Guo, Dongjun and Dunn-Walters, Deborah K and Fraternali, Franca and Ng, Joseph CF},
-	title = {ImmunoMatch learns and predicts cognate pairing of heavy and light immunoglobulin chains},
-	elocation-id = {2025.02.11.637677},
-	year = {2025},
-	doi = {10.1101/2025.02.11.637677},
-	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/early/2025/02/15/2025.02.11.637677},
-	eprint = {https://www.biorxiv.org/content/early/2025/02/15/2025.02.11.637677.full.pdf},
-	journal = {bioRxiv}
-}
-```
+Guo, D., Dunn-Walters, D.K., Fraternali, F. et al. ImmunoMatch learns and predicts cognate pairing of heavy and light immunoglobulin chains. _Nat Methods_ 23, 106–117 (2026). https://doi.org/10.1038/s41592-025-02913-x
+
 
 
