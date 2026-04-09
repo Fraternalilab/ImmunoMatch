@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ImmunoMatch"
+version = "0.1.10"
+description = "ImmunoMatch predicts the pairing between heavy and light chains in antibody."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Dongjun Guo", email = "d.guo@ucl.ac.uk"},
+  {name = "Deborah K. Dunn-Walters", email = "d.dunn-walters@surrey.ac.uk"},
+  {name = "Franca Fraternali", email = "f.fraternali@ucl.ac.uk"},
+  {name = "Joseph C. F. Ng", email = "joseph.ng@ucl.ac.uk"}
+]
+dependencies = ["numpy","pandas","transformers==4.57.1","rjieba","torch","datasets","scikit-learn","accelerate>=0.26.0"]
+
+[project.urls]
+"Homepage" = "https://github.com/Fraternalilab/ImmunoMatch"
+

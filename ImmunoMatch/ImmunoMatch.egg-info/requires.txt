@@ -1,0 +1,8 @@
+numpy
+pandas
+transformers==4.57.1
+rjieba
+torch
+datasets
+scikit-learn
+accelerate>=0.26.0
